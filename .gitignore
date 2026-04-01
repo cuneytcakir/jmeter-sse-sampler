@@ -193,5 +193,3 @@ target/*
 /logs
 logs/*
 /.idea/
-/catalog
-catalog
