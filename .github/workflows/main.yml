@@ -26,7 +26,7 @@ jobs:
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Publish to Maven Central
-        run: mvn compile javadoc:javadoc source:jar gpg:sign deploy -DskipTests
+        run: mvn deploy -DskipTests -Dgpg.pinentry-mode=loopback -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}"
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
