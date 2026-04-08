@@ -4,13 +4,18 @@
     "name": "SSE Sampler",
     "description": "High-performance Server-Sent Events (SSE) sampler for load testing real-time streaming HTTP endpoints. Supports custom authentication headers, configurable listen duration, HTTP error detection, and accurate JMeter metrics (bytes, connect time, throughput).",
     "helpUrl": "https://github.com/cuneytcakir/jmeter-sse-sampler#readme",
-    "markerFile": "lib/ext/jmeter-sse-sampler-1.0.0.jar",
+    "markerFile": "lib/ext/jmeter-sse-sampler-2.0.0.jar",
     "iconUrl": "https://github.com/cuneytcakir/jmeter-sse-sampler/blob/main/docs/icon.png",
     "vendor": "Cüneyt Çakır",
     "versions": {
       "1.0.0": {
         "downloadUrl": "https://github.com/cuneytcakir/jmeter-sse-sampler/releases/download/v1.0.0/jmeter-sse-sampler-1.0.0.jar",
         "changes": "Initial release. Shared OkHttpClient pool, custom headers, HTTP status detection, accurate bytes/connect-time reporting.",
+        "libs": {}
+      },
+      "2.0.0": {
+        "downloadUrl": "https://repo1.maven.org/maven2/io/github/cuneytcakir/jmeter-sse-sampler/2.0.0/jmeter-sse-sampler-2.0.0.jar",
+        "changes": "Maven Central release preparations have been completed, and the package name has been updated.",
         "libs": {}
       }
     }

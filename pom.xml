@@ -5,9 +5,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jmeter.tester</groupId>
+    <groupId>io.github.cuneytcakir</groupId>
     <artifactId>jmeter-sse-sampler</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>JMeter SSE Sampler</name>
@@ -21,6 +21,21 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>cuneytcakir</id>
+            <name>Cüneyt Çakır</name>
+            <email>cuneyt-cakir@yandex.com</email>
+            <url>https://github.com/cuneytcakir</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/cuneytcakir/jmeter-sse-sampler.git</connection>
+        <developerConnection>scm:git:ssh://github.com:cuneytcakir/jmeter-sse-sampler.git</developerConnection>
+        <url>https://github.com/cuneytcakir/jmeter-sse-sampler</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -87,6 +102,63 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.12.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.8</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <tokenAuth>true</tokenAuth>
+                    <autoPublish>true</autoPublish>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.15.0</version>
                 <configuration>
@@ -128,19 +200,19 @@
                             <relocations>
                                 <relocation>
                                     <pattern>okhttp3</pattern>
-                                    <shadedPattern>com.github.tester.shaded.okhttp3</shadedPattern>
+                                    <shadedPattern>io.github.cuneytcakir.shaded.okhttp3</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>okio</pattern>
-                                    <shadedPattern>com.github.tester.shaded.okio</shadedPattern>
+                                    <shadedPattern>io.github.cuneytcakir.shaded.okio</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>kotlin</pattern>
-                                    <shadedPattern>com.github.tester.shaded.kotlin</shadedPattern>
+                                    <shadedPattern>io.github.cuneytcakir.shaded.kotlin</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>kotlinx</pattern>
-                                    <shadedPattern>com.github.tester.shaded.kotlinx</shadedPattern>
+                                    <shadedPattern>io.github.cuneytcakir.shaded.kotlinx</shadedPattern>
                                 </relocation>
                             </relocations>
                             <transformers>

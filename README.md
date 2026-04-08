@@ -133,7 +133,7 @@ When the listen duration expires, the plugin:
 
 To enable debug logging, add to `$JMETER_HOME/bin/log4j2.xml`:
 ```xml
-<Logger name="com.github.tester.jmeter.sse" level="debug"/>
+<Logger name="io.github.cuneytcakir.jmeter.sse" level="debug"/>
 ```
 
 ---
