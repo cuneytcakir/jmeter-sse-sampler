@@ -25,6 +25,11 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Create dummy settings-security.xml
+        run: |
+          mkdir -p ~/.m2
+          echo "<settingsSecurity><master>{jSMOWnoPFgsHVpMvz5VrIt5kRbzRsx8OPeyLSG3/5XQ=}</master></settingsSecurity>" > ~/.m2/settings-security.xml
+
       - name: Publish to Maven Central
         run: mvn deploy -DskipTests -Dgpg.pinentry-mode=loopback -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}"
         env:
