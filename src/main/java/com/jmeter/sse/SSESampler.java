@@ -1,6 +1,7 @@
 package com.jmeter.sse;
 
 import okhttp3.*;
+import okhttp3.ConnectionPool;
 import okhttp3.sse.*;
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
@@ -39,10 +40,17 @@ public class SSESampler extends AbstractSampler {
     /**
      * Shared client — one connection pool reused across all threads/samples.
      * Creating a new OkHttpClient per sample() causes thread/socket exhaustion.
+     *
+     * Connection pool is set to 1000 to support high thread counts in load tests.
+     * OkHttp's default pool (max 5 idle connections) is far too small for
+     * scenarios with hundreds of concurrent JMeter threads, each holding a
+     * long-lived SSE connection. Exceeding the pool limit causes new requests
+     * to stall waiting for an available slot.
      */
     private static final OkHttpClient SHARED_CLIENT = new OkHttpClient.Builder()
             .readTimeout(0, TimeUnit.MILLISECONDS)   // SSE: keep connection alive indefinitely
             .connectTimeout(10, TimeUnit.SECONDS)
+            .connectionPool(new ConnectionPool(1000, 5, TimeUnit.MINUTES))
             .build();
 
     @Override
